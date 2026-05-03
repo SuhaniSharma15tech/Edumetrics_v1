@@ -2,13 +2,17 @@ import os
 import json
 import re
 import requests
+from dotenv import load_dotenv
+import os
 
-GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
+# Change '../.env' (one level up from analysis_engine = backend/)
+load_dotenv(os.path.join(os.path.dirname(os.path.abspath(__file__)), '../.env'))
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+# Change this line at the top of aiviews.py:
 GEMINI_URL = (
     "https://generativelanguage.googleapis.com/v1beta/models/"
-    "gemini-2.0-flash:generateContent"
+    "gemini-2.0-flash-lite:generateContent"
 )
-
 # ─────────────────────────────────────────────────────────────────────────────
 # PROMPT 1 — Analysis agent
 # Used by: student_summary(student_data)
@@ -545,10 +549,10 @@ if __name__ == "__main__":
 
     command = summary["intervention"]["content_generation_command"]
 
-    print("\n── STEP 2: generate_content (email_to_parent) ───────────")
-    email = generate_content("email_to_parent", command)
-    print(email)
+    # print("\n── STEP 2: generate_content (email_to_parent) ───────────")
+    # email = generate_content("email_to_parent", command)
+    # print(email)
 
-    print("\n── STEP 2b: generate_content (one_to_one_conversation) ──")
-    script = generate_content("one_to_one_conversation", command)
-    print(script)
+    # print("\n── STEP 2b: generate_content (one_to_one_conversation) ──")
+    # script = generate_content("one_to_one_conversation", command)
+    # print(script)
